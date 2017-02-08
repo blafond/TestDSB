@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <vdb name="PartsDataVDB" version="1">
 
+<property name="dsbTeiidStatus" value="Active"/>
+<property name="dsbTeiidStatusMessage" value="The VDB is Active"/>
 
 <model name="views" type="VIRTUAL">
 <metadata type="DDL">
