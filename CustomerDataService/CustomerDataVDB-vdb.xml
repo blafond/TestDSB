@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="CustomerDataVDB" version="1">
+
+<property name="dsbTeiidStatus" value="Active"/>
+<property name="dsbTeiidStatusMessage" value="The VDB is Active"/>
+
+<model name="views" type="VIRTUAL">
+<metadata type="DDL">
+<![CDATA[CREATE VIEW CustomerDataView (
+	ACCTID bigdecimal,
+	CUSTID string,
+	TYPE string,
+	STATUS string,
+	DATEOPENED timestamp,
+	DATECLOSED timestamp,
+	PRIMARY KEY(ACCTID)
+)
+AS
+SELECT ACCTID, CUSTID, TYPE, STATUS, DATEOPENED, DATECLOSED FROM ACCOUNT;
+]]>
+
+</metadata>
+</model>
+<model name="CustomerDS" type="PHYSICAL">
+<source name="CustomerAccountsDS" translator-name="sqlserver" connection-jndi-name="java:/CustomerAccountsDS"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE ACCOUNT (
+	ACCTID bigdecimal(18) NOT NULL OPTIONS ("NAMEINSOURCE" '"ACCTID"', "NATIVE_TYPE" 'numeric'),
+	CUSTID string(12) NOT NULL OPTIONS ("NAMEINSOURCE" '"CUSTID"', "NATIVE_TYPE" 'varchar'),
+	TYPE string(10) OPTIONS ("NAMEINSOURCE" '"TYPE"', "NATIVE_TYPE" 'char'),
+	STATUS string(10) OPTIONS ("NAMEINSOURCE" '"STATUS"', "NATIVE_TYPE" 'char'),
+	DATEOPENED timestamp NOT NULL OPTIONS ("NAMEINSOURCE" '"DATEOPENED"', "NATIVE_TYPE" 'datetime'),
+	DATECLOSED timestamp OPTIONS ("NAMEINSOURCE" '"DATECLOSED"', "NATIVE_TYPE" 'datetime')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"ACCOUNT"', "CARDINALITY" '37');
+]]>
+
+</metadata>
+</model>
+
+</vdb>
