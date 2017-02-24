@@ -1,7 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?><dataservice name="PartsData">
+<?xml version='1.0' encoding='UTF-8'?><dataservice name="AccountService">
 
+	<description>My first account H2 service</description>
 
-	<service-vdb-file path="PartsDataVDB-vdb.xml" publish="ifMissing" vdbName="PartsDataVDB" vdbVersion="1">
+	<service-vdb-file path="AccountServiceVDB-vdb.xml" publish="ifMissing" vdbName="AccountServiceVDB" vdbVersion="1">
 	</service-vdb-file>
 
 </dataservice>
