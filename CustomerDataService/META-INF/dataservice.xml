@@ -1,8 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?><dataservice name="AccountService">
+<?xml version='1.0' encoding='UTF-8'?><dataservice name="PartsJoin">
 
-	<description>My first account H2 service</description>
 
-	<service-vdb-file path="AccountServiceVDB-vdb.xml" publish="ifMissing" vdbName="AccountServiceVDB" vdbVersion="1">
+	<service-vdb-file path="PartsJoinVDB-vdb.xml" publish="ifMissing" vdbName="PartsJoinVDB" vdbVersion="1">
 	</service-vdb-file>
 
 </dataservice>
