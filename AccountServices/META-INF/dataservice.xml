@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?><dataservice name="Accounts">
+
+	<description>H2 Accounts JDBC database</description>
+
+	<service-vdb-file path="AccountsVDB-vdb.xml" publish="ifMissing" vdbName="AccountsVDB" vdbVersion="1">
+	</service-vdb-file>
+
+</dataservice>
