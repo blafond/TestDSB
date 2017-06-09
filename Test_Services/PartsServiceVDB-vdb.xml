@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="PartsServiceVDB" version="1">
+
+<property name="dsbOwner" value="teiidUser"/>
+
+<model name="views" type="VIRTUAL">
+<metadata type="DDL">
+<![CDATA[CREATE VIEW PartsServiceView (
+	RowId integer,
+	PART_ID string,
+	PART_NAME string,
+	PART_ID string,
+	PART_NAME string,
+	PART_COLOR string,
+	PART_WEIGHT string,
+	PRIMARY KEY(RowId)
+)
+AS
+SELECT ROW_NUMBER() OVER (ORDER BY A.PART_ID), A.PART_ID, A.PART_NAME, B.PART_ID, B.PART_NAME, B.PART_COLOR, B.PART_WEIGHT FROM PARTS AS A INNER JOIN PARTS AS B ON A.PART_ID = B.PART_ID;
+]]>
+
+</metadata>
+</model>
+<model name="PartsSupplier" type="PHYSICAL">
+<source name="PartsSupplier_Oracle" translator-name="oracle" connection-jndi-name="java:/PartsSupplier_Oracle"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE PARTS (
+	PART_ID string(4) NOT NULL OPTIONS ("NAMEINSOURCE" '"PART_ID"', "NATIVE_TYPE" 'CHAR'),
+	PART_NAME string(255) OPTIONS ("NAMEINSOURCE" '"PART_NAME"', "NATIVE_TYPE" 'VARCHAR2'),
+	PART_COLOR string(30) OPTIONS ("NAMEINSOURCE" '"PART_COLOR"', "NATIVE_TYPE" 'VARCHAR2'),
+	PART_WEIGHT string(255) OPTIONS ("NAMEINSOURCE" '"PART_WEIGHT"', "NATIVE_TYPE" 'VARCHAR2')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"PARTS"', "CARDINALITY" '17');
+]]>
+
+</metadata>
+</model>
+<model name="PartsSupplier_SS" type="PHYSICAL">
+<source name="PartsSupplier_SS" translator-name="sqlserver" connection-jndi-name="java:/PartsSupplier_SS"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE PARTS (
+	PART_ID string(50) NOT NULL OPTIONS ("NAMEINSOURCE" '"PART_ID"', "NATIVE_TYPE" 'varchar'),
+	PART_NAME string(255) OPTIONS ("NAMEINSOURCE" '"PART_NAME"', "NATIVE_TYPE" 'varchar'),
+	PART_COLOR string(30) OPTIONS ("NAMEINSOURCE" '"PART_COLOR"', "NATIVE_TYPE" 'varchar'),
+	PART_WEIGHT string(255) OPTIONS ("NAMEINSOURCE" '"PART_WEIGHT"', "NATIVE_TYPE" 'varchar')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"PARTS"', "CARDINALITY" '16');
+]]>
+
+</metadata>
+</model>
+
+</vdb>
